@@ -20,7 +20,7 @@ import allure
 # 项目根目录建config包，里面建conf.py文件，用于配置
 from config import conf
 
-# 1、导包 demo_import_api
+# 1、导包 demo_import_api（一个文件只做一次）
 # 2、找模板写测试用例 demo_http_
 # test_change_pwd_var方法名，可以自定义，但是必须是test_开头 test_user_admin_register_1
 def test_user_admin_register_1():
