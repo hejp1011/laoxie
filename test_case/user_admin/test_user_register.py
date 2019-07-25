@@ -40,3 +40,5 @@ def test_user_admin_register_1():
     assert_tool.assert_equal(resp.status_code, 200)
     # 自定义断言 body['data']["username"]字典中获取某个key的值，username 预期结果，是一个变量
     assert_tool.assert_equal(body['data']["username"], username)
+
+
