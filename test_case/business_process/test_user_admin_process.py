@@ -59,6 +59,37 @@ from config import conf
 
 #请求数据在请求地址里边
 # 1、使用.format进行字符串格式化
+'''
+一、allure环境搭建
+    安装allure插件
+        解压
+        配置环境变量
+
+    安装pytest插件
+        pip install allure-pytest
+
+二、生成报告的步骤
+    pytest.main(['--alluredir','reports/xml'])
+        --alluredir 把生成的报告数据存到后边的文件夹内
+    allure generate reports/xml -o reports/html --clean
+        把报告数据解析成html文件数据
+        reports/xml  pytest.main生成报告数据的文件
+        reports/html  存放html文件数据的文件夹
+        --clean  先清空reports/html下边的文件，然后再生成报告
+
+三、美化报告
+
+    1、用例分类（装饰器）
+        @allure.feature(“一级分类名称”) 一级分类
+        @allure.story(“二级分类名称”) 二级分类
+    2、用例中添加断言信息
+        allure.step(“断言信息”)
+    3、添加附件信息
+        allure.attach()
+
+
+'''
+
 
 data={}
 #注册
@@ -76,9 +107,13 @@ def test_user_register():
 }
     resp = request_tool.post_request(url, json=req)
     body = resp.json()
+    with allure.step("断言响应状态码，实际结果是：{}，预期结果为：200".format(resp.status_code)):
+        pass
     # 判断响应码
     assert_tool.assert_equal(resp.status_code, 200)
     # 自定义断言
+    with allure.step("断言用户名，实际结果是：{}，预期结果为：{}".format(body['data']["username"],username)):
+        pass
     assert_tool.assert_equal(body['data']["username"], username)
     data["id"] = body['data']["id"]
     data['username'] = username
