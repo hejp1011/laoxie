@@ -56,4 +56,15 @@ __mtime__ = '2019/7/24'
 """
 import pytest
 
-pytest.main(['-v','-m','ssssa'])
+'''
+pytest.main(['--alluredir','reports/xml'])
+    --alluredir 把生成的报告数据存到后边的文件夹内
+allure generate reports/xml -o reports/html --clean
+    把报告数据解析成html文件数据
+    reports/xml  pytest.main生成报告数据的文件
+    reports/html  存放html文件数据的文件夹
+    --clean  先清空reports/html下边的文件，然后再生成报告
+'''
+
+
+pytest.main(['-s','-q','--alluredir','reports/xml','test_case/business_process'])

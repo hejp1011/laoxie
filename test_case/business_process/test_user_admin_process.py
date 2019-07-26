@@ -63,6 +63,8 @@ from config import conf
 data={}
 #注册
 
+@allure.feature("后台用户管理流程")
+@allure.story('注册-新用户')
 def test_user_register():
     # config/conf.py里面配置GY_API_URL,模板快捷键demo_conf_api
     url = conf.GY_API_URL + '/admin/register'
@@ -84,7 +86,8 @@ def test_user_register():
 
 
 #给用户分配角色
-
+@allure.feature("后台用户管理流程")
+@allure.story('给用户分配角色：1，商品管理员。2，商品分类管理员。3、商品类型管理员。4、品牌管理员 ')
 def test_user_update_role():
     # config/conf.py里面配置GY_API_URL,模板快捷键demo_conf_api
     url = conf.GY_API_URL +'/admin/role/update'
@@ -101,6 +104,8 @@ def test_user_update_role():
 
 
 #查询用户角色信息
+@allure.feature("后台用户管理流程")
+@allure.story('查询用户角色信息')
 def test_user_get_role():
     # config/conf.py里面配置GY_API_URL,模板快捷键demo_conf_api
     url = conf.GY_API_URL +'/admin/role/{}'.format(data["id"])
@@ -113,7 +118,8 @@ def test_user_get_role():
 
 
 #登录
-
+@allure.feature("后台用户管理流程")
+@allure.story('登录')
 def test_user_login():
     # config/conf.py里面配置GY_API_URL,模板快捷键demo_conf_api
     url = conf.GY_API_URL + '/admin/login'
@@ -130,7 +136,8 @@ def test_user_login():
     assert_tool.assert_equal(body['data']['tokenHead'], "Bearer ")
     data['token'] = body['data']['tokenHead'] + body['data']['token']
 #获取当前登录用户信息
-
+@allure.feature("后台用户管理流程")
+@allure.story('获取当前登录用户信息-根据token获取用户登录信息')
 def test_user_info():
     # config/conf.py里面配置GY_API_URL,模板快捷键demo_conf_api
     url = conf.GY_API_URL + '/admin/info'
