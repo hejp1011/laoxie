@@ -33,5 +33,13 @@ __mtime__ = '2019/7/24'
              =@                  .@^            
 
 """
+import io
 
+import yaml
+
+with open("E:\\softwaredata\\python\\gy-api-1906A\\data\\demo\\test.yaml", 'r', encoding="utf-8") as rf:
+    d = rf.read()
+
+    ss = yaml.load(d)
+    print(ss)
 

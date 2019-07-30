@@ -8,7 +8,7 @@ import pytest
                                                                                            
 if __name__ == '__main__':
     # 修改成要执行的测试用例                                                               
-    test_case = './test_case/demo/test_demo1.py'
+    test_case = 'test_case/product_category/test_product_category_add.py'
     xml_report_path = './reports/xml/'                                                     
     html_report_path = './reports/html/'                                                   
                                                                                            

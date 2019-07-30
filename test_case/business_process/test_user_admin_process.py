@@ -173,11 +173,11 @@ def test_user_login():
 #获取当前登录用户信息
 @allure.feature("后台用户管理流程")
 @allure.story('获取当前登录用户信息-根据token获取用户登录信息')
-def test_user_info():
+def test_user_info(token):
     # config/conf.py里面配置GY_API_URL,模板快捷键demo_conf_api
     url = conf.GY_API_URL + '/admin/info'
     headers = {
-            'Authorization':data['token'],
+            'Authorization':token,
             'charset':'UTF-8'
     }
     resp = request_tool.get_request(url,headers=headers)

@@ -1,4 +1,4 @@
-from eeee import Say
+from tool.data_tool import Say
 
 s=Say()
 s.say_goodbye()

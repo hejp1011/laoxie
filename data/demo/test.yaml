@@ -1,0 +1,12 @@
+-
+ test_case : 添加商品分类_全字段正常流_1
+ uri : /productCategory/create
+-
+ test_case : 添加商品分类_全字段正常流_2
+ uri : /productCategory/create
+
+
+ {
+   "password": "string",
+   "username": "string"
+ }

@@ -21,8 +21,6 @@ __mtime__ = '2019/7/24'
 """
 import pytest
 
-from eeee import Say
-
 
 @pytest.mark.all
 @pytest.mark.tes
