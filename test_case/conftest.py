@@ -1,5 +1,4 @@
-
-
+from selenium import webdriver
 from tools import request_tool
 from tools import assert_tool
 from tools import random_tool
@@ -12,9 +11,9 @@ import pytest
 import allure
 # 项目根目录建config包，里面建conf.py文件，用于配置
 from config import conf
+from config.conf import DRIVER_PATH
+from tool.base_ui import BaseUI
 
-
-                                                            
 d = {'pwd':'123456','user_name':'admin','token':'123567'}
 
 @pytest.fixture(scope='session')                            
@@ -36,7 +35,7 @@ def pub_var():
 
 
 
-@pytest.fixture(scope="session",autouse=True)
+@pytest.fixture(scope="session")
 def set_token():
     url = '/admin/login'
     req = {
@@ -51,6 +50,21 @@ def set_token():
     assert_tool.assert_equal(body['data']['tokenHead'], "Bearer ")
     conf.HEADERS["Authorization"] = body['data']['tokenHead'] + body['data']['token']
 
+
+
+@pytest.fixture(scope="session")
+def base():
+    #fixture装饰器可以设置前置后置步骤
+    #返回值存到了方法名中
+    #测试用例中，根据方法名来使用该方法的返回值
+    # 打开浏览器
+    dr = webdriver.Chrome(DRIVER_PATH)
+    dr.maximize_window()  # 最大化浏览器
+    dr.implicitly_wait(8)  # 设置隐式时间等待
+    # 使用baseUI
+    base = BaseUI(dr)
+    yield base
+    dr.quit()
 
 
 '''

@@ -5,6 +5,7 @@ import time
 
 import allure
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
@@ -62,8 +63,8 @@ class BaseUI():
         :return:
         '''
         element = self.local_element(xpath)
+        ActionChains(self.driver).click(element).key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL).send_keys(Keys.BACKSPACE).perform()
 
-        element.clear()
         element.send_keys(text)
 
 
