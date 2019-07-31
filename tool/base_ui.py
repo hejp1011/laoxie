@@ -38,9 +38,20 @@ class BaseUI():
         self.driver = driver
 
 
+    def page_source(self):
+        '''
+        获取页面源代码
+        :return:
+        '''
+        return self.driver.page_source
 
 
     def local_element(self,xpath):
+        '''
+        根据xpath定位页面元素
+        :param xpath:
+        :return:
+        '''
         return WebDriverWait(self.driver, 5, 0.5).until(EC.presence_of_element_located((By.XPATH, xpath)))
 
     @shot
@@ -111,7 +122,7 @@ class BaseUI():
     @shot
     def select_by_index(self,step,xpath,index):
         '''
-        #操作select下拉框，通过下标选择
+        #操作select下拉框，通过下标选择 下标从0开始
         :param step:操作步骤
         :param xpath:xpath
         :param index:下标
@@ -238,6 +249,11 @@ class BaseUI():
 
 
     def execute_script(self,js):
+        '''
+        执行js代码
+        :param js:js代码
+        :return:
+        '''
         self.driver.execute_script(js)
 
 
@@ -263,22 +279,7 @@ class BaseUI():
             print("修改属性值失败，属性名:" + attribute_name + " 属性值:" + attribute_value)
             raise
 
-    @shot
-    def js_click_by_xpath(self,step,xpath):
-        '''
-        #通过xpath执行js代码点击元素
-        :param step: 操作步骤
-        :param xpath: xpath
-        :return:
-        '''
-        try:
-            self.local_element(xpath)
-            js = "var xpath = \"" + self.double_to_single_mark(
-            xpath) + "\";var element = document.evaluate(xpath,document,null,XPathResult.ANY_TYPE,null).iterateNext();element.click();"
-            self.execute_script(js)
-        except:
-            print("使用js点击失败，xpath为：" + xpath)
-            raise
+
 
     @shot
     def click_by_js(self, step, xpath):
@@ -317,7 +318,7 @@ class BaseUI():
     @shot
     def move_to_element(self,step,xpath):
         '''
-        #窗口滚动到指定的元素
+        #窗鼠标移动到指定的元素
         :param step: 操作步骤
         :param xpath: xpath
         :return:
