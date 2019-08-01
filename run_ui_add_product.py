@@ -20,5 +20,5 @@ if __name__ == '__main__':
     # cmd1 = 'allure generate %s -o %s --clean' % (xml_report_path, html_report_path)
     # cmd2 = 'allure serve %s' % (xml_report_path)
                                                                                            
-    shell_tool.invoke(cmd1)                                                                
+    # shell_tool.invoke(cmd1)
     # shell_tool.invoke(cmd2)
