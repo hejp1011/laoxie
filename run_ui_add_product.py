@@ -12,12 +12,12 @@ if __name__ == '__main__':
     # 修改成要执行的测试用例                                                               
     test_case = 'test_case/ui/mall/test_mall_add_product.py'
     cur = '{}'.format(time.strftime('%Y%m%d%H%M%S',time.localtime((time.time()))))
-    xml_report_path = './reports/xml{}/'.format(cur)
-    html_report_path = './reports/html{}/'.format(cur)
+    xml_report_path = './reports/xml/'
+    html_report_path = './reports/html/'
                                                                                            
     pytest.main(['-s', '-q', '--alluredir',                                                
                  xml_report_path, test_case])                                              
-    cmd1 = 'allure generate %s -o %s --clean' % (xml_report_path, html_report_path)        
+    cmd1 = 'allure generate %s -o %s --clean' % (xml_report_path, html_report_path)
     # cmd2 = 'allure serve %s' % (xml_report_path)
                                                                                            
     shell_tool.invoke(cmd1)                                                                
