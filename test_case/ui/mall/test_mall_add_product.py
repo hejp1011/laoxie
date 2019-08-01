@@ -18,8 +18,8 @@ import allure
 # 项目根目录建config包，里面建conf.py文件，用于配置
 from config import conf
 
-
-
+@allure.feature("添加商品流程")
+@allure.story('登录')
 def test_login(base):
     #打开登录界面 http://qa.yansl.com/#/login
     base.get("打开登录界面",'http://qa.yansl.com/#/login')
@@ -29,12 +29,13 @@ def test_login(base):
     base.send_keys("输入密码",'''//input[@name="password"]''',"123456")
     #点击登录 (//span[contains(text(),'登录')])[1]
     base.click("点击登录","(//span[contains(text(),'登录')])[1]")
-
-    #点击残忍拒绝 //span[text()='残忍拒绝']
-    base.click("点击残忍拒绝",'''//span[text()='残忍拒绝']''')
-    # 点击登录 (//span[contains(text(),'登录')])[1]
-    base.click("点击登录", "(//span[contains(text(),'登录')])[1]")
-    sleep(5)
+    try:
+        #点击残忍拒绝 //span[text()='残忍拒绝']
+        base.click("点击残忍拒绝",'''//span[text()='残忍拒绝']''')
+        # 点击登录 (//span[contains(text(),'登录')])[1]
+        base.click("点击登录", "(//span[contains(text(),'登录')])[1]")
+    except:
+        pass
     # f = False
     # try:
     #     base.local_element("//span[text()='首页']")
@@ -45,10 +46,16 @@ def test_login(base):
     #获取页面源代码
     sleep(2)
     page_source = base.driver.page_source
+    with allure.step("登录界面跳转断言"):
+        allure.attach(page_source,"实际结果",allure.attachment_type.TEXT)
+        allure.attach('首页', "预期结果", allure.attachment_type.TEXT)
+
+
     assert_tool.assert_in(page_source,'首页')
 
     #断言 页面跳转至首页
-
+@allure.feature("添加商品流程")
+@allure.story('打开添加商品页面-添加商品信息')
 def test_add_product(base):
     # 点击商品 (//span[contains(text(),'商品')])[1]
     base.click("点击商品",'''(//span[contains(text(),'商品')])[1]''')
@@ -78,18 +85,18 @@ def test_add_product(base):
     base.click("点击下一步，填写商品属性", '''//span[text()='下一步，填写商品属性']''')
     #滚动窗口
     base.scroll_screen("滚动窗口")
-    # #切换窗口至iframe
-    base.switch_to_frame("切换窗口至iframe ",'(//iframe)[1]')
-
-    #输入电脑端详情   //body/p
-    base.send_keys("#输入电脑端详情 ","//body",'测试数据')
-    #切出iframe
-    base.switch_to_content("切出iframe")
+    # # #切换窗口至iframe
+    # base.switch_to_frame("切换窗口至iframe ",'(//iframe)[1]')
+    #
+    # #输入电脑端详情   //body/p
+    # base.send_keys("#输入电脑端详情 ","//body",'测试数据')
+    # #切出iframe
+    # base.switch_to_content("切出iframe")
 
     # 点击下一步，选择商品关联
     base.click("点击下一步，选择商品关联", '''//span[text()='下一步，选择商品关联']''')
     base.click("点击完成，提交商品",'''//span[text()='完成，提交商品']''')
-    base.click("点击确定",'''//span[contains(text(),'确定')]''')
+    base.click("点击确定",'''//span[contains(text(),'确定')]/..''')
 
     print(base.page_source())
     sleep(10)
