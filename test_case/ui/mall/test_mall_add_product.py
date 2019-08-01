@@ -98,7 +98,6 @@ def test_add_product(base):
     base.click("点击完成，提交商品",'''//span[text()='完成，提交商品']''')
     base.click("点击确定",'''//span[contains(text(),'确定')]/..''')
 
-    print(base.page_source())
     sleep(10)
 
 
